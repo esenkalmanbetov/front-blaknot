@@ -28,7 +28,7 @@ class FormsPage extends React.Component {
           onSubmit={this.submitHandler}
           noValidate
         >
-          <MDBCol md="4" className="mb-3">
+          <MDBCol className="mb-3">
             <label
               htmlFor="defaultFormRegisterNameEx"
               className="grey-text"
@@ -48,7 +48,7 @@ class FormsPage extends React.Component {
             <div className="valid-feedback">Looks good!</div>
           </MDBCol>
 
-          <MDBCol md="4" className="mb-3">
+          <MDBCol className="mb-3">
             <label
               htmlFor="defaultFormRegisterPasswordEx4"
               className="grey-text"
