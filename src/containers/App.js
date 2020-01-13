@@ -27,6 +27,8 @@ class App extends React.Component {
       isModalOpen: !this.state.isModalOpen
     })
   }
+
+
   render() {
     return (
       <div className="App">
