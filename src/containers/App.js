@@ -1,31 +1,37 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react'
+import { MDBBtn } from 'mdbreact'
 
 import './App.css';
+import Modal from '../components/Modal'
 
 class App extends React.Component {
+  state = {
+    isModalOpen: false
+  }
 
-  setSubject = () => {
-    // console.log('set')
-    this.props.store.setSubject([
-      {Name: 'bla', Description: 'bla bla'},
-      {Name: 'lol', Description: 'lol lol'},
-    ])
+  createSubject = () => {
+  }
+
+  editSubject = () => {
 
   }
 
-  getSubject = () => {
-    // console.log('get')
-    let subject = this.props.store.getSubject
-    console.log(subject)
+  getSubjects = () => {
   }
 
+  toggleModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    })
+  }
   render() {
     return (
       <div className="App">
-        <h1>Hello</h1>
-        <button onClick={this.setSubject}>setSubject</button>
-        <button onClick={this.getSubject}>getSugject</button>
+        <h1>My diary</h1>
+        <MDBBtn onClick={this.toggleModal}>Create</MDBBtn>
+        {this.state.isModalOpen ? <Modal toggle={this.toggleModal}/> : null}
+
       </div>
     )
   }
