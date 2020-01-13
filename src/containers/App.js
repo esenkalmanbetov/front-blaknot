@@ -10,7 +10,9 @@ class App extends React.Component {
     isModalOpen: false
   }
 
-  createSubject = () => {
+  createSubject = (form) => {
+    this.props.store.createSubject(form)
+    this.toggleModal()
   }
 
   editSubject = () => {
@@ -30,7 +32,12 @@ class App extends React.Component {
       <div className="App">
         <h1>My diary</h1>
         <MDBBtn onClick={this.toggleModal}>Create</MDBBtn>
-        {this.state.isModalOpen ? <Modal toggle={this.toggleModal}/> : null}
+        {this.state.isModalOpen ?
+          <Modal
+            toggle={this.toggleModal}
+            handleSubmit={this.createSubject}
+          /> : null
+        }
 
       </div>
     )

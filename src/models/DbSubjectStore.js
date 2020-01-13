@@ -7,9 +7,8 @@ const DbSubjectStore = types
     Subjects: types.optional(types.array(SubjectModel), [])
   })
   .actions(self => ({
-    setSubject(data) {
+    createSubject(data) {
       console.log('store set', data)
-      self.Subjects = data
     }
   }))
   .views(self => ({

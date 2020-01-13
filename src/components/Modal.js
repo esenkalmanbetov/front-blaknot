@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
   MDBContainer,
-  MDBBtn,
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBModalFooter
 } from 'mdbreact';
+
+import FormPage from './Form'
 
 class Modal extends Component {
   state = {
@@ -15,18 +15,19 @@ class Modal extends Component {
 
   toggle = () => this.props.toggle()
 
+  handleSubmit = (form) => this.props.handleSubmit(form)
+
   render() {
     return (
       <MDBContainer>
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
           <MDBModalHeader toggle={this.toggle}>MDBModal title</MDBModalHeader>
           <MDBModalBody>
-            (...)
-        </MDBModalBody>
-          <MDBModalFooter>
-            <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-            <MDBBtn color="primary">Save changes</MDBBtn>
-          </MDBModalFooter>
+            <FormPage
+              onSave={this.handleSubmit}
+              onCancel={this.toggle}
+            />
+          </MDBModalBody>
         </MDBModal>
       </MDBContainer>
     );
