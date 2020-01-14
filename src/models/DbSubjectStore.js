@@ -2,7 +2,7 @@ import { types, getSnapshot } from 'mobx-state-tree'
 
 import axios from 'axios'
 
-
+import api from './api.config'
 import SubjectModel from './Subject.model'
 
 const DbSubjectStore = types
@@ -12,7 +12,7 @@ const DbSubjectStore = types
   .actions(self => ({
     createSubject(data) {
 
-      axios.post('http://localhost:3001/subjects', data)
+      axios.post(`${api}/subjects`, data)
         .then((response) => {
           console.log(response.data);
         }, (error) => {
