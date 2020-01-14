@@ -26,6 +26,7 @@ class Modal extends Component {
             <FormPage
               onSave={this.handleSubmit}
               onCancel={this.toggle}
+              subject={this.props.subject}
             />
           </MDBModalBody>
         </MDBModal>

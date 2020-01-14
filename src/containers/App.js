@@ -24,10 +24,6 @@ class App extends React.Component {
     this.toggleModal()
   }
 
-  editSubject = () => {
-
-  }
-
   get Subjects() {
     return this.props.store.getSubjects
   }
@@ -40,7 +36,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log('render; ', this.Subjects)
+    
     return (
       <div className="App">
         <h1>My diary</h1>
@@ -52,10 +48,10 @@ class App extends React.Component {
           /> : null
         }
 
-        {this.Subjects.map(subject => {
+        {this.Subjects.map((subject, idx) => {
           return (
             <Card
-              key={subject.id}
+              key={subject.id + idx}
               subject={subject}
             />
           )

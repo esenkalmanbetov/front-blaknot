@@ -2,10 +2,18 @@ import React from "react";
 import { MDBCol, MDBBtn } from "mdbreact";
 
 class FormsPage extends React.Component {
-  state = {
-    Title: 'Title',
-    Description: 'Description'
-  };
+
+  constructor(props){
+    super(props)
+
+    const initialTitle = this.props.subject ? this.props.subject.Title : ''
+    const initialDesc = this.props.subject ? this.props.subject.Description : ''
+
+    this.state = {
+      Title: initialTitle,
+      Description: initialDesc
+    };  
+  }
 
   submitHandler = event => {
     event.preventDefault();

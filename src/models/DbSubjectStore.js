@@ -29,7 +29,28 @@ const DbSubjectStore = types
       } catch (error) {
         console.error("Failed to fetch projects", error)
       }
-    })
+    }),
+
+    editSubject: flow(function* editSubject(id, data) {
+      self._subjects = []
+      try {
+        const response = yield axios.put(`${api}/subjects/${id}`, data)
+        self._subjects = response.data
+      } catch (error) {
+        console.error("Failed to fetch projects", error)
+      }
+    }),
+
+    deleteSubject: flow(function* deleteSubject(id) {
+      self._subjects = []
+      try {
+        const response = yield axios.delete(`${api}/subjects/${id}`)
+        self._subjects = response.data
+      } catch (error) {
+        console.error("Failed to fetch projects", error)
+      }
+    }),
+    
   }))
   .views(self => ({
     get getSubjects() {

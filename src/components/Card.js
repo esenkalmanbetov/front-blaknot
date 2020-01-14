@@ -1,4 +1,5 @@
 import React from 'react';
+import { inject, observer } from 'mobx-react'
 import {
   MDBBtn,
   MDBCard,
@@ -8,29 +9,61 @@ import {
   MDBCol
 } from 'mdbreact';
 
-const Card = (props) => {
-  return (
-    <MDBCol>
-      <MDBCard style={{ width: "22rem" }}>
-        <MDBCardBody>
-          <MDBCardTitle>{props.subject.Title}</MDBCardTitle>
-          <MDBCardText>
-            {props.subject.Description}
-          </MDBCardText>
-          <MDBCardText small muted>
-            Created: {props.subject.CreatedDate}
-          </MDBCardText>
-          {props.subject.UpdatedDate ?
+import Modal from './Modal'
+
+class Card extends React.Component {
+
+  state = {
+    isModalOpen: false
+  }
+
+  editSubject = (form) => {
+    this.props.store.editSubject(this.props.subject.id, form)
+    this.toggleModal()
+  }
+
+  deleteSubject = () => {
+    this.props.store.deleteSubject(this.props.subject.id)
+  }
+
+  toggleModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    })
+  }
+
+  render() {
+    const { subject } = this.props
+    return (
+      <MDBCol>
+        <MDBCard style={{ width: "22rem" }}>
+          <MDBCardBody>
+            <MDBCardTitle>{subject.Title}</MDBCardTitle>
+            <MDBCardText>
+              {subject.Description}
+            </MDBCardText>
             <MDBCardText small muted>
-              Updated:
+              Created: {subject.CreatedDate}
+            </MDBCardText>
+            {subject.UpdatedDate ?
+              <MDBCardText small muted>
+                Updated: {subject.UpdatedDate}
             </MDBCardText> : null
+            }
+            <MDBBtn onClick={this.toggleModal} size='sm'>Edit</MDBBtn>
+            <MDBBtn onClick={this.deleteSubject} size='sm'>Delete</MDBBtn>
+          </MDBCardBody>
+          {this.state.isModalOpen ?
+            <Modal
+              toggle={this.toggleModal}
+              handleSubmit={this.editSubject}
+              subject={subject}
+            /> : null
           }
-          <MDBBtn href="#" size='sm'>Edit</MDBBtn>
-          <MDBBtn href="#" size='sm'>Delete</MDBBtn>
-        </MDBCardBody>
-      </MDBCard>
-    </MDBCol>
-  )
+        </MDBCard>
+      </MDBCol>
+    )
+  }
 }
 
-export default Card;
+export default inject('store')(observer(Card));
