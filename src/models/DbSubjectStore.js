@@ -1,4 +1,4 @@
-import { types, getSnapshot } from 'mobx-state-tree'
+import { types, getSnapshot, flow } from 'mobx-state-tree'
 
 import axios from 'axios'
 
@@ -7,23 +7,33 @@ import SubjectModel from './Subject.model'
 
 const DbSubjectStore = types
   .model('DbSubjectStore', {
-    Subjects: types.optional(types.array(SubjectModel), [])
+    _subjects: types.optional(types.array(SubjectModel), []),
   })
   .actions(self => ({
-    createSubject(data) {
 
-      axios.post(`${api}/subjects`, data)
-        .then((response) => {
-          console.log(response.data);
-        }, (error) => {
-          console.log(error);
-        });
+    getAllSubjects: flow(function* getAllSubjects() {
+      self._subjects = []
+      try {
+        const response = yield axios.get(`${api}/subjects`)
+        self._subjects = response.data
+      } catch (error) {
+        console.error("Failed to fetch projects", error)
+      }
+    }),
 
-    }
+    createSubject: flow(function* createSubject(data) {
+      self._subjects = []
+      try {
+        const response = yield axios.post(`${api}/subjects`, data)
+        self._subjects = response.data
+      } catch (error) {
+        console.error("Failed to fetch projects", error)
+      }
+    })
   }))
   .views(self => ({
-    get getSubject() {
-      return getSnapshot(self.Subjects)
+    get getSubjects() {
+      return getSnapshot(self._subjects)
     }
   }))
 

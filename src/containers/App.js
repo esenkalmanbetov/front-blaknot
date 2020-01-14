@@ -4,10 +4,19 @@ import { MDBBtn } from 'mdbreact'
 
 import './App.css';
 import Modal from '../components/Modal'
+import Card from '../components/Card'
 
 class App extends React.Component {
   state = {
     isModalOpen: false
+  }
+
+  componentDidMount() {
+    this.getAllSubjects()
+  }
+
+  getAllSubjects = () => {
+    this.props.store.getAllSubjects()
   }
 
   createSubject = (form) => {
@@ -19,7 +28,8 @@ class App extends React.Component {
 
   }
 
-  getSubjects = () => {
+  get Subjects() {
+    return this.props.store.getSubjects
   }
 
   toggleModal = () => {
@@ -30,16 +40,26 @@ class App extends React.Component {
 
 
   render() {
+    console.log('render; ', this.Subjects)
     return (
       <div className="App">
         <h1>My diary</h1>
-        <MDBBtn onClick={this.toggleModal}>Create</MDBBtn>
+        <MDBBtn onClick={this.toggleModal} size="sm">Create</MDBBtn>
         {this.state.isModalOpen ?
           <Modal
             toggle={this.toggleModal}
             handleSubmit={this.createSubject}
           /> : null
         }
+
+        {this.Subjects.map(subject => {
+          return (
+            <Card
+              key={subject.id}
+              subject={subject}
+            />
+          )
+        })}
 
       </div>
     )
