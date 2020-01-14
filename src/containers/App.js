@@ -5,6 +5,7 @@ import { MDBBtn } from 'mdbreact'
 import './App.css';
 import Modal from '../components/Modal'
 import Card from '../components/Card'
+import Search from '../components/Search'
 
 class App extends React.Component {
   state = {
@@ -40,6 +41,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>My diary</h1>
+        <Search />
         <MDBBtn onClick={this.toggleModal} size="sm">Create</MDBBtn>
         {this.state.isModalOpen ?
           <Modal

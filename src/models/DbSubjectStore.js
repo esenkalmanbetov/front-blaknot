@@ -50,6 +50,19 @@ const DbSubjectStore = types
         console.error("Failed to fetch projects", error)
       }
     }),
+
+    searchSubject: flow(function* searchSubject(text) {
+      if(!text) return
+      
+      self._subjects = []
+      try {
+        const response = yield axios.get(`${api}/subjects/search/${text}`)
+        self._subjects = response.data
+      } catch (error) {
+        console.error("Failed to fetch projects", error)
+      }
+    }),
+
     
   }))
   .views(self => ({
