@@ -3,7 +3,7 @@ import { MDBCol, MDBBtn } from "mdbreact";
 
 class FormsPage extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     const initialTitle = this.props.subject ? this.props.subject.Title : ''
@@ -12,16 +12,18 @@ class FormsPage extends React.Component {
     this.state = {
       Title: initialTitle,
       Description: initialDesc
-    };  
+    };
   }
 
   submitHandler = event => {
     event.preventDefault();
     event.target.className += " was-validated";
-    this.props.onSave({
-      Title: this.state.Title,
-      Description: this.state.Description
-    })
+    if (this.state.Title && this.state.Description) {
+      this.props.onSave({
+        Title: this.state.Title,
+        Description: this.state.Description
+      })
+    }
   };
 
   changeHandler = event => {
