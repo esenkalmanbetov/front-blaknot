@@ -37,12 +37,16 @@ class App extends React.Component {
 
 
   render() {
-    
+
     return (
       <div className="App">
         <h1>My diary</h1>
         <Search />
-        <MDBBtn onClick={this.toggleModal} size="sm">Create</MDBBtn>
+        <MDBBtn
+          onClick={this.toggleModal}
+          size="sm"
+        >
+          Create</MDBBtn>
         {this.state.isModalOpen ?
           <Modal
             toggle={this.toggleModal}
