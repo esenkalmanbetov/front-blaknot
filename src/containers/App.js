@@ -22,8 +22,6 @@ class App extends React.Component {
   };
 
   createSubject = form => {
-    //SERVER
-    // this.props.store.createSubject(form)
     const list = this.state.list;
     if (!list.length) {
       form.id = 1;
@@ -38,7 +36,6 @@ class App extends React.Component {
   };
 
   editSubject = (id, form) => {
-    // console.log(id, form);
     let tempList = [...this.state.list];
     tempList.forEach(subject => {
       if (subject.id === id) {

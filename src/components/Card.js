@@ -18,7 +18,6 @@ class Card extends React.Component {
   }
 
   editSubject = (form) => {
-    // this.props.store.editSubject(this.props.subject.id, form)
     this.props.editSubject(this.props.subject.id, form)
     this.toggleModal()
   }
