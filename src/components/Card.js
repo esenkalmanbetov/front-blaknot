@@ -18,10 +18,10 @@ class Card extends React.Component {
   }
 
   editSubject = (form) => {
-    this.props.store.editSubject(this.props.subject.id, form)
+    // this.props.store.editSubject(this.props.subject.id, form)
+    this.props.editSubject(this.props.subject.id, form)
     this.toggleModal()
   }
-
   deleteSubject = () => {
     this.props.store.deleteSubject(this.props.subject.id)
   }
@@ -42,14 +42,14 @@ class Card extends React.Component {
             <MDBCardText>
               {subject.Description}
             </MDBCardText>
-            <MDBCardText small muted>
+            {/* <MDBCardText small muted>
               Created: {subject.CreatedDate}
             </MDBCardText>
             {subject.UpdatedDate ?
               <MDBCardText small muted>
                 Updated: {subject.UpdatedDate}
             </MDBCardText> : null
-            }
+            } */}
             <MDBBtn onClick={this.toggleModal} size='sm'>Edit</MDBBtn>
             <MDBBtn onClick={this.deleteSubject} size='sm'>Delete</MDBBtn>
           </MDBCardBody>
